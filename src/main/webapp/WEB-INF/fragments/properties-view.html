@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div class="properties" ng-controller="propertiesController" ng-show="editMode">
+    <div th:replace="fragments/rate-panel :: div"></div>
+    <div th:replace="fragments/members-panel :: div"></div>
+</div>
+</body>
+</html>

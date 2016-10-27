@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org" ng-app="teamManager">
+<head>
+    <title>Home</title>
+    <div th:include="fragments/head :: head" th:remove="tag"></div>
+</head>
+<body>
+<nav th:replace="fragments/nav :: nav">
+
+</nav>
+<div class="container-fluid">
+    <div class="editor" ng-controller="editorController" ng-init="init()" style="margin-left: 10%">
+        <h3>Teams</h3>
+        <form class="form-inline" role="form" data-toggle="validator" ng-submit="addTeam(team)">
+            <span class="glyphicon glyphicon-plus-sign" ng-if="!show" ng-click="click()"></span>
+            <div ng-if="show">
+                <span class="glyphicon glyphicon-minus-sign" ng-click="click()"></span>
+                <input style="width: 58%" type="text"
+                       class="form-control" placeholder="Name" required autofocus ng-model="team.name">
+                <label>
+                    <span class="glyphicon glyphicon-ok"></span>
+                    <input type="submit" style="font-size: 0; background: none; border:none; display: block;">
+                </label>
+            </div>
+        </form>
+        <div style="display: flex; justify-content: space-between; width: 100%">
+            <div th:replace="fragments/teams-view :: div"></div>
+            <div th:replace="fragments/properties-view :: div"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

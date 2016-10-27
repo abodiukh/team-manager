@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+<div class="panel-default" ng-controller="rateController">
+    <div class="panel-heading">Rate</div>
+    <table class="table table-hover rate-table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Seniority</th>
+            <th>Language</th>
+            <th>Rate</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="rateItem in rate.rateItems" ng-include="getTemplate(rateItem)"></tr>
+        </tbody>
+    </table>
+    <script type="text/ng-template" id="displayRate">
+        <td>
+            <span class="glyphicon glyphicon-remove" ng-click="remove(rateItem)"></span>
+            <span class="glyphicon glyphicon-pencil" ng-click="edit(rateItem)"></span>
+        </td>
+        <td>{{rateItem.seniority}}</td>
+        <td>{{rateItem.language}}</td>
+        <td>{{rateItem.amount}}</td>
+    </script>
+    <script type="text/ng-template" id="editRate">
+        <td>
+            <span class="glyphicon glyphicon-ok" ng-click="save($index)"></span>
+            <span class="glyphicon glyphicon-ban-circle" ng-click="reset()"></span>
+        </td>
+        <td>
+            <select ng-model="selectedRateItem.seniority" required>
+                <option ng-repeat="seniority in seniorities" value="{{seniority}}" ng-selected="selectedRateItem.seniority===seniority">{{seniority}}</option>
+            </select>
+        </td>
+        <td>
+            <select ng-model="selectedRateItem.language" required>
+                <option ng-repeat="language in languages" value="{{language}}" ng-selected="selectedRateItem.language===language">{{language}}</option>
+            </select>
+        </td>
+        <td><input class="text" ng-model="selectedRateItem.amount"/></td>
+    </script>
+</div>
+</body>
+</html>

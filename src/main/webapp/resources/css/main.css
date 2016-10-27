@@ -1,0 +1,141 @@
+ul[dnd-list], ul[dnd-list] > li {
+    position: relative;
+    display: block;
+}
+
+ul[dnd-list] .dndDraggingSource {
+    display: none;
+}
+
+ul[dnd-list] {
+    min-height: 100px;
+    padding-left: 0px;
+}
+
+ul[dnd-list] .dndPlaceholder {
+    display: block;
+    border-radius: 5px;
+    border: dashed #ddd;
+    min-height: 150px;
+}
+
+ul[dnd-list] li.selected {
+    background-color: #ECEFF1;
+    color: #3c763d;
+}
+
+ul.list-group:after {
+    clear: both;
+    display: block;
+    content: "";
+}
+
+.list-group-item, .list-group-item:first-child, .list-group-item:last-child {
+    float: left;
+    border: solid #ddd;
+    height: 70px;
+    border-radius: 20px;
+    margin-right: 25px;
+    min-width: 100px;
+    margin-top: 15px;
+}
+
+div.dev-prop span {
+    margin-bottom: 2px;
+    margin-right: 2px;
+    font-size: 10px;
+}
+
+a span {
+    font-size: 20px;
+}
+
+span {
+    color: black;
+}
+
+label {
+    color: black;
+}
+
+.properties {
+    width: 30%;
+    margin-right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+input[class*="text"] {
+    width: 50px;
+    height: 20px;
+}
+
+.teams ul {
+    width: 100%;
+}
+
+.teams {
+    width: 60%;
+}
+
+.panel-heading div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+table[class*="table"]{
+    font-size: 15px;
+}
+
+.panel-heading label {
+    width: 80%;
+}
+
+div .edit-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.panel-heading .glyphicon {
+    margin-right: 10px;
+}
+
+.panel-heading .glyphicon.remove {
+    color: red;
+}
+
+.dev {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dev .items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.list-group-item.dev-placeholder {
+    border: dotted #ddd;
+    text-align: center;
+}
+
+.dev-placeholder span {
+    color: #ddd;
+    margin-top: 15%;
+}
+
+table[class*="table"] select, input {
+    border: 2px solid #dadada;
+    border-radius: 7px;
+}
+
+table[class*="table"] select, input:focus {
+    outline: none;
+    border-color: #ddd;
+    box-shadow: 0 0 10px #ddd;
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign up</title>
+    <div th:include="fragments/head :: head" th:remove="tag"></div>
+</head>
+<body>
+<div class="container">
+    <div class="col-sm-4 col-sm-offset-4">
+        <form style="margin-top: 30%;" class="form-signin" name="login-form" th:action="@{/registration}" method="post">
+            <h2 class="form-signin-heading">Please Register</h2>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control" type="text" id="email" name="email"/>
+            </div>
+            <div class="form-group">
+                <label for="name">Username</label>
+                <input class="form-control" type="text" id="name" name="name"/>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control" type="password" id="password" name="password"/>
+            </div>
+            <div class="form-group">
+                <label for="confirmedPassword">Confirm password</label>
+                <input class="form-control" type="password" id="confirmedPassword" name="confirmedPassword"/>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-default">Sign up</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<body>
+<div class="teams">
+    <ul dnd-list="models.lists.teams">
+        <li class="panel panel-default" ng-repeat="team in models.lists.teams" dnd-draggable="team"
+            dnd-moved="models.lists.teams.splice($index, 1)"
+            dnd-effect-allowed="move"
+            dnd-selected="select()"
+            ng-class="{'selected': models.selected === team}"
+            ng-controller="teamController"
+            unselect-team="unselect()"
+        >
+            <div class="panel-heading">
+                <div>
+                    <label>{{team.name}}</label>
+                    <div ng-show="show()" class="edit-items">
+                        <span class="glyphicon glyphicon-pencil" ng-if="!editMode" ng-click="edit(team.name)"></span>
+                        <span class="glyphicon glyphicon-ok" ng-if="editMode" ng-click="edit(team.name)"></span>
+                        <span class="glyphicon glyphicon-remove remove" ng-click="deleteTeam(team)"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="member in team.members">
+                        <div class="dev">
+                            <div class="items">
+                                <span class="glyphicon glyphicon-user" style="font-size: 30px"></span>
+                                <div class="dev-prop" style="display: flex; flex-direction: column; justify-content: flex-start;" ng-if="editMode">
+                                    <span class="glyphicon glyphicon-pencil" ng-click="editMember(team, member)"></span>
+                                    <span class="glyphicon glyphicon-remove" style="color: red;" ng-click="deleteMember(team, member)"></span>
+                                </div>
+                            </div>
+                            <label>{{member.name}}</label>
+                        </div>
+                    </li>
+                    <li class="list-group-item dev-placeholder" ng-if="editMode">
+                        <a ng-click="addMember(team)">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
