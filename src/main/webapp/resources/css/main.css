@@ -33,7 +33,7 @@ ul.list-group:after {
 .list-group-item, .list-group-item:first-child, .list-group-item:last-child {
     float: left;
     border: solid #ddd;
-    height: 70px;
+    height: 85px;
     border-radius: 20px;
     margin-right: 25px;
     min-width: 100px;
@@ -56,6 +56,8 @@ span {
 
 label {
     color: black;
+    font-size: 12px;
+    margin-bottom: 0;
 }
 
 .properties {
@@ -67,7 +69,6 @@ label {
 }
 
 input[class*="text"] {
-    width: 50px;
     height: 20px;
 }
 
@@ -85,8 +86,8 @@ input[class*="text"] {
     justify-content: space-between;
 }
 
-table[class*="table"]{
-    font-size: 15px;
+table[class*="table"] {
+    font-size: 12px;
 }
 
 .panel-heading label {
@@ -126,10 +127,11 @@ div .edit-items {
 
 .dev-placeholder span {
     color: #ddd;
-    margin-top: 15%;
+    margin-top: 30%;
 }
 
 table[class*="table"] select, input {
+    width: 100%;
     border: 2px solid #dadada;
     border-radius: 7px;
 }
@@ -138,4 +140,32 @@ table[class*="table"] select, input:focus {
     outline: none;
     border-color: #ddd;
     box-shadow: 0 0 10px #ddd;
+}
+
+.properties {
+    width: 100%;
+    -webkit-transition: width 0.5s;
+    transition: width 0.5s;
+    float: right;
+}
+
+.properties.ng-hide-add.ng-hide-add-active,
+.properties.ng-hide-remove.ng-hide-remove-active {
+    display: block !important;
+}
+
+.properties.ng-hide {
+    width: 0;
+}
+
+body {
+    overflow-x:hidden;
+}
+
+.panel-default {
+    overflow-x: hidden;
+}
+
+.error{
+    border-color:red !important;
 }

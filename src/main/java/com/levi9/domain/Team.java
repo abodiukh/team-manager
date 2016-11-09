@@ -9,6 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 public class Team {
@@ -19,18 +25,21 @@ public class Team {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rate_id")
-    private Rate rate;
+    @OrderBy
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
+    @Cascade(CascadeType.DELETE)
+    private Set<Rate> rates;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "teams")
-    private Set<Developer> developers;
+    @OrderBy
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
+    @Cascade(CascadeType.DELETE)
+    private Set<TeamMember> teamMembers;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    private Long cost;
+    private Integer cost;
 
     public Long getId() {
         return id;
@@ -40,19 +49,19 @@ public class Team {
         this.id = id;
     }
 
-    public Set<Developer> getDevelopers() {
-        return developers;
+    public Set<TeamMember> getTeamMembers() {
+        return teamMembers;
     }
 
-    public void setDevelopers(final Set<Developer> developers) {
-        this.developers = developers;
+    public void setTeamMembers(final Set<TeamMember> teamMembers) {
+        this.teamMembers = teamMembers;
     }
 
-    public Long getCost() {
+    public Integer getCost() {
         return cost;
     }
 
-    public void setCost(final Long cost) {
+    public void setCost(final Integer cost) {
         this.cost = cost;
     }
 
@@ -64,12 +73,12 @@ public class Team {
         this.name = name;
     }
 
-    public Rate getRate() {
-        return rate;
+    public Set<Rate> getRates() {
+        return rates;
     }
 
-    public void setRate(final Rate rate) {
-        this.rate = rate;
+    public void setRates(final Set<Rate> rates) {
+        this.rates = rates;
     }
 
     public User getUser() {

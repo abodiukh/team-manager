@@ -103,7 +103,7 @@ public class BaseController {
         if (!invalidMessages.isEmpty()) {
             model.addAttribute("errors", errors);
         } else {
-            return "redirect:/";
+            return "redirect:/login";
         }
         return "signup";
     }

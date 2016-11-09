@@ -24,6 +24,8 @@ public class UserServiceDetailsImpl implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    private static final String defaultRolePrefix = "ROLE_";
+
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(final String username)
@@ -46,7 +48,7 @@ public class UserServiceDetailsImpl implements UserDetailsService {
     private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
         Set<GrantedAuthority> setAuths = new HashSet<>();
         for (UserRole userRole : userRoles) {
-            setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
+            setAuths.add(new SimpleGrantedAuthority(defaultRolePrefix + userRole.getRole()));
         }
         return new ArrayList<>(setAuths);
     }

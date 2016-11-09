@@ -4,45 +4,48 @@
 </head>
 <body>
 <div class="panel-default" ng-controller="rateController">
-    <div class="panel-heading">Rate</div>
+    <div class="panel-heading" style="display: flex; justify-content: space-between;">
+        <h5>Rate</h5>
+        <span class="glyphicon glyphicon-plus-sign" style="padding-top: 10px;" ng-click="addRate()"></span>
+    </div>
     <table class="table table-hover rate-table">
         <thead>
         <tr>
             <th></th>
             <th>Seniority</th>
-            <th>Language</th>
+            <th>Position</th>
             <th>Rate</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="rateItem in rate.rateItems" ng-include="getTemplate(rateItem)"></tr>
+        <tr ng-repeat="rate in rates" ng-include="getTemplate(rate)"></tr>
         </tbody>
     </table>
     <script type="text/ng-template" id="displayRate">
         <td>
-            <span class="glyphicon glyphicon-remove" ng-click="remove(rateItem)"></span>
-            <span class="glyphicon glyphicon-pencil" ng-click="edit(rateItem)"></span>
+            <span class="glyphicon glyphicon-remove" ng-click="remove(rate)"></span>
+            <span class="glyphicon glyphicon-pencil" ng-click="edit(rate)"></span>
         </td>
-        <td>{{rateItem.seniority}}</td>
-        <td>{{rateItem.language}}</td>
-        <td>{{rateItem.amount}}</td>
+        <td>{{rate.seniority}}</td>
+        <td>{{rate.position}}</td>
+        <td>{{rate.rate}}</td>
     </script>
     <script type="text/ng-template" id="editRate">
         <td>
-            <span class="glyphicon glyphicon-ok" ng-click="save($index)"></span>
-            <span class="glyphicon glyphicon-ban-circle" ng-click="reset()"></span>
+            <span class="glyphicon glyphicon-ok" ng-click="!valid() || save($index)"></span>
+            <span class="glyphicon glyphicon-ban-circle" ng-click="reset(rate)"></span>
         </td>
         <td>
-            <select ng-model="selectedRateItem.seniority" required>
-                <option ng-repeat="seniority in seniorities" value="{{seniority}}" ng-selected="selectedRateItem.seniority===seniority">{{seniority}}</option>
+            <select ng-model="selectedRate.seniority" ng-class="{error: !selectedRate.seniority}">
+                <option ng-repeat="seniority in seniorities" value="{{seniority.name}}" ng-selected="selectedRate.name===seniority.name">{{seniority.name}}</option>
             </select>
         </td>
         <td>
-            <select ng-model="selectedRateItem.language" required>
-                <option ng-repeat="language in languages" value="{{language}}" ng-selected="selectedRateItem.language===language">{{language}}</option>
+            <select ng-model="selectedRate.position" ng-class="{error: !selectedRate.position}">
+                <option ng-repeat="position in positions" value="{{position.name}}" ng-selected="selectedRate.position===position.name">{{position.name}}</option>
             </select>
         </td>
-        <td><input class="text" ng-model="selectedRateItem.amount"/></td>
+        <td><input class="text" ng-model="selectedRate.rate" ng-class="{error: !selectedRate.rate}"/></td>
     </script>
 </div>
 </body>

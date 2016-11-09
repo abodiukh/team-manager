@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <body>
-<div class="teams">
+<div class="col-md-12">
     <ul dnd-list="models.lists.teams">
         <li class="panel panel-default" ng-repeat="team in models.lists.teams" dnd-draggable="team"
             dnd-moved="models.lists.teams.splice($index, 1)"
@@ -16,8 +16,8 @@
                 <div>
                     <label>{{team.name}}</label>
                     <div ng-show="show()" class="edit-items">
-                        <span class="glyphicon glyphicon-pencil" ng-if="!editMode" ng-click="edit(team.name)"></span>
-                        <span class="glyphicon glyphicon-ok" ng-if="editMode" ng-click="edit(team.name)"></span>
+                        <span class="glyphicon glyphicon-pencil" ng-if="!editMode" ng-click="edit(team)"></span>
+                        <span class="glyphicon glyphicon-ok" ng-if="editMode" ng-click="edit(team)"></span>
                         <span class="glyphicon glyphicon-remove remove" ng-click="deleteTeam(team)"></span>
                     </div>
                 </div>
@@ -34,6 +34,7 @@
                                 </div>
                             </div>
                             <label>{{member.name}}</label>
+                            <label>{{member.position}}</label>
                         </div>
                     </li>
                     <li class="list-group-item dev-placeholder" ng-if="editMode">
@@ -43,6 +44,7 @@
                     </li>
                 </ul>
             </div>
+            <div class="panel-footer"><label>{{team.cost}}$</label></div>
         </li>
     </ul>
 </div>

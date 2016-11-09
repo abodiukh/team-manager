@@ -23,24 +23,52 @@ app.controller("membersController", ['$scope', 'teamFactory', function ($scope, 
         $scope.selectedMember = angular.copy(member);
     };
 
+    $scope.addMember = function () {
+        var teamId = $scope.$parent.team.id;
+        var member = {teamId: teamId, name: "Name", position: "", seniority: "", involvement: 100, vacancy: false};
+        $scope.members.push(member);
+        $scope.selectedMember = angular.copy(member);
+    };
+
     $scope.save = function (idx) {
+        var teamId = $scope.$parent.team.id;
         $scope.members[idx] = angular.copy($scope.selectedMember);
-        var team = $scope.$parent.team;
-        team.members = $scope.members;
-        teamFactory.saveTeam(team);
+        $scope.$parent.team.members = $scope.members;
+        teamFactory.updateMember($scope.selectedMember).success(function (data) {
+            teamFactory.getTeam(teamId).success(function (data) {
+                $scope.$parent.team = data;
+            })
+        });
         $scope.reset();
     };
 
-    $scope.remove = function (idx) {
-        $scope.members.splice(idx, 1);
-        var team = $scope.$parent.team;
-        team.members = $scope.members;
-        teamFactory.saveTeam(team);
+    $scope.remove = function (member) {
+        var teamId = $scope.$parent.team.id;
+        var members = $scope.members;
+        members.splice(members.indexOf(member), 1);
+        $scope.$parent.team.members = members;
+        if (member.id) {
+            teamFactory.deleteMember(member.id).success(function (data) {
+                teamFactory.getTeam(teamId).success(function (data) {
+                    $scope.$parent.team = data;
+                })
+            });
+        }
         $scope.reset();
     };
 
-    $scope.reset = function () {
-        $scope.selectedMember = {};
+    $scope.reset = function (member) {
+        if ($scope.valid()) {
+            $scope.selectedMember = {};
+        } else {
+            var members = $scope.members;
+            members.splice(members.indexOf(member), 1);
+            $scope.$parent.team.members = members;
+        }
     };
+
+    $scope.valid = function () {
+        return !(!$scope.selectedMember.seniority || !$scope.selectedMember.position || !$scope.selectedMember.name);
+    }
 
 }]);

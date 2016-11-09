@@ -1,3 +1,3 @@
-var app = angular.module('teamManager', ["dndLists"]);
+var app = angular.module('teamManager', ["dndLists", "ngAnimate"]);
 
 

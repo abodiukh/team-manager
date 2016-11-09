@@ -1,21 +1,39 @@
-app.factory("teamFactory", function () {
-    var data = {
-        teams: {}
-    };
+app.factory("teamFactory", ['$http', function ($http) {
 
     return {
-        getTeam: function (name) {
-            return data.teams[name];
+        getTeams: function () {
+            return $http.get('/team/all');
         },
-        saveTeam: function (name, team) {
-            data.teams[name] = team;
+        getTeam: function (teamId) {
+            return $http.get('/team/' + teamId);
         },
-        setData: function (teams) {
-            data.teams = teams;
+        addTeam: function (team) {
+            return $http.post('/team', team);
         },
-        getRandomInt: function (min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
+        saveTeam: function (team) {
+            return $http.put('/team', team);
+        },
+        deleteTeam: function (teamId) {
+            return $http.delete('/team/' + teamId);
+        },
+        addMember: function (member) {
+            return $http.post('/member', member);
+        },
+        deleteMember: function (memberId) {
+            return $http.delete('/member/' + memberId);
+        },
+        updateMember: function (member) {
+            return $http.put('/member', member);
+        },
+        addRate: function (rate) {
+            return $http.post('/rate', rate);
+        },
+        saveRate: function (rate) {
+            return $http.put('/rate', rate);
+        },
+        deleteRate: function (rateId) {
+            return $http.delete('/rate/' + rateId);
         }
     };
 
-});
+}]);

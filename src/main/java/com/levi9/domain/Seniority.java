@@ -11,7 +11,14 @@ public class Seniority {
     @GeneratedValue
     private Long id;
 
-    private String seniority;
+    private String name;
+
+    public Seniority() {
+    }
+
+    public Seniority(final String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -21,11 +28,11 @@ public class Seniority {
         this.id = id;
     }
 
-    public String getSeniority() {
-        return seniority;
+    public String getName() {
+        return name;
     }
 
-    public void setSeniority(final String seniority) {
-        this.seniority = seniority;
+    public void setName(final String name) {
+        this.name = name;
     }
 }

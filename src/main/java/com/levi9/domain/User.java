@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +31,7 @@ public class User {
     private Set<UserRole> roles;
 
     @OneToMany(mappedBy = "user")
+    @OrderBy("id DESC")
     private Set<Team> teams;
 
     public User() {

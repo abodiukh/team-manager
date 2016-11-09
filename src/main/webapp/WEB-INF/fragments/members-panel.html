@@ -3,17 +3,20 @@
 <head>
 </head>
 <body>
-<div class="panel-default" ng-controller="membersController">
-    <div class="panel-heading">Team members</div>
+<div class="table-responsive panel-default" ng-controller="membersController">
+    <div class="panel-heading" style="display: flex; justify-content: space-between;">
+        <h5>Team members</h5>
+        <span class="glyphicon glyphicon-plus-sign" style="padding-top: 10px;" ng-click="addMember()"></span>
+    </div>
     <table class="table table-hover members-table">
         <thead>
         <tr>
-            <th></th>
-            <th>Seniority</th>
-            <th>Language</th>
-            <th>Name</th>
-            <th>Involvement</th>
-            <th>Vacancy</th>
+            <th class="col-lg-2"></th>
+            <th class="col-lg-2">Seniority</th>
+            <th class="col-lg-2">Position</th>
+            <th class="col-lg-4">Name</th>
+            <th class="col-lg-1">Inv.</th>
+            <th class="col-lg-1">Vacancy</th>
         </tr>
         </thead>
         <tbody>
@@ -21,34 +24,35 @@
         </tbody>
     </table>
     <script type="text/ng-template" id="displayMember">
-        <td>
+        <td class="col-lg-2">
             <span class="glyphicon glyphicon-remove" ng-click="remove(member)"></span>
             <span class="glyphicon glyphicon-pencil" ng-click="edit(member)"></span>
         </td>
-        <td>{{member.seniority}}</td>
-        <td>{{member.language}}</td>
-        <td>{{member.name}}</td>
-        <td>{{member.involvement}}</td>
-        <td>{{member.vacancy}}</td>
+        <td class="col-lg-2">{{member.seniority}}</td>
+        <td class="col-lg-2">{{member.position}}</td>
+        <td class="col-lg-4">{{member.name}}</td>
+        <td class="col-lg-1">{{member.involvement}}</td>
+        <td class="col-lg-1">{{member.vacancy}}</td>
     </script>
     <script type="text/ng-template" id="editMember">
-        <td>
-            <span class="glyphicon glyphicon-ok" ng-click="save($index)"></span>
-            <span class="glyphicon glyphicon-ban-circle" ng-click="reset()"></span>
+        <td class="col-lg-2">
+            <span class="glyphicon glyphicon-ok" ng-click="!valid() || save($index)"></span>
+            <span class="glyphicon glyphicon-ban-circle" ng-click="reset(member)"></span>
         </td>
-        <td>
-            <select ng-model="selectedMember.seniority" required>
-                <option ng-repeat="seniority in seniorities" value="{{seniority}}" ng-selected="selectedMember.seniority===seniority">{{seniority}}</option>
+        <td class="col-lg-2">
+            <select ng-model="selectedMember.seniority" ng-class="{error: !selectedMember.seniority}">
+                <option ng-repeat="seniority in seniorities" value="{{seniority.name}}" ng-selected="selectedMember.seniority===seniority.name">{{seniority.name}}</option>
             </select>
         </td>
-        <td>
-            <select ng-model="selectedMember.language" required>
-                <option ng-repeat="language in languages" value="{{language}}" ng-selected="selectedMember.language===language">{{language}}</option>
+        <td class="col-lg-2">
+            <select ng-model="selectedMember.position" ng-class="{error: !selectedMember.position}">
+                <option ng-repeat="position in positions" value="{{position.name}}" ng-selected="selectedMember.position===position.name">{{position.name}}</option>
             </select>
         </td>
-        <td><input class="text" ng-model="selectedMember.name"/></td>
-        <td><input class="text" ng-model="selectedMember.involvement"/></td>
-        <td><input type="checkbox" ng-model="selectedMember.vacancy"/></td>
+        <td class="col-lg-4">
+            <input class="text" ng-model="selectedMember.name" ng-class="{error: !selectedMember.name}"/></td>
+        <td class="col-lg-1"><input class="text" ng-model="selectedMember.involvement"/></td>
+        <td class="col-lg-1"><input type="checkbox" ng-model="selectedMember.vacancy"/></td>
     </script>
 </div>
 </body>
