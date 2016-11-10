@@ -6,6 +6,9 @@ app.factory('propertiesFactory', ['$http' , function ($http) {
         },
         getSeniorities: function () {
             return $http.get('/properties/seniorities');
+        },
+        getEmployees: function () {
+            return $http.get('/properties/employees');
         }
     }
 

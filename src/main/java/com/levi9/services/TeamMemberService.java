@@ -45,7 +45,7 @@ public class TeamMemberService {
     @PreAuthorize("isAuthenticated()")
     public TeamMemberDTO getMemberByName(final String name) {
         TeamMember teamMember = teamMemberRepository.findByEmployeeName(name);
-        if (teamMember!=null) {
+        if (teamMember != null) {
             return converter.toTeamMemberDTO(teamMember);
         }
         return null;
@@ -54,7 +54,10 @@ public class TeamMemberService {
     @PreAuthorize("isAuthenticated()")
     public void addMember(final TeamMemberDTO teamMemberDTO) {
         TeamMember teamMember = new TeamMember();
-        Employee employee = new Employee();
+        Employee employee = employeeRepository.findByName(teamMemberDTO.getName());
+        if (employee == null) {
+            employee = new Employee();
+        }
         updateEmployee(teamMemberDTO, employee);
         teamMember.setEmployee(employee);
         teamMember.setInvolvement(teamMemberDTO.getInvolvement());

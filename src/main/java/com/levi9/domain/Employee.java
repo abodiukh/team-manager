@@ -1,15 +1,11 @@
 package com.levi9.domain;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Employee {
@@ -27,9 +23,6 @@ public class Employee {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seniority_id")
     private Seniority seniority;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
-    private Set<TeamMember> teamMembers;
 
     public Employee() {
     }

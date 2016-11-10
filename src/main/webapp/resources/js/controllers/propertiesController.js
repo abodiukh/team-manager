@@ -2,6 +2,7 @@ app.controller("propertiesController", ['$scope', 'teamFactory', 'propertiesFact
 
     $scope.seniorities = [];
     $scope.positions = [];
+    $scope.employees = [];
     $scope.editMode = false;
     $scope.team = {};
 
@@ -11,6 +12,9 @@ app.controller("propertiesController", ['$scope', 'teamFactory', 'propertiesFact
         });
         propertiesFactory.getSeniorities().then(function (response) {
             $scope.seniorities = response.data;
+        });
+        propertiesFactory.getEmployees().then(function (response) {
+            $scope.employees = response.data;
         })
     };
 

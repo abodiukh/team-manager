@@ -35,7 +35,7 @@
         <td class="col-lg-1">{{member.vacancy}}</td>
     </script>
     <script type="text/ng-template" id="editMember">
-        <td class="col-lg-2">
+        <td class="col-lg-1">
             <span class="glyphicon glyphicon-ok" ng-click="!valid() || save($index)"></span>
             <span class="glyphicon glyphicon-ban-circle" ng-click="reset(member)"></span>
         </td>
@@ -50,8 +50,12 @@
             </select>
         </td>
         <td class="col-lg-4">
-            <input class="text" ng-model="selectedMember.name" ng-class="{error: !selectedMember.name}"/></td>
-        <td class="col-lg-1"><input class="text" ng-model="selectedMember.involvement"/></td>
+            <input class="text" list="names" ng-model="selectedMember.name" ng-class="{error: !selectedMember.name}"/>
+            <datalist id="names">
+                <option ng-repeat="employee in employees">{{employee.name}}</option>
+            </datalist>
+        </td>
+        <td class="col-lg-2"><input class="text" type="number" min="0" max="100" ng-model="selectedMember.involvement"/></td>
         <td class="col-lg-1"><input type="checkbox" ng-model="selectedMember.vacancy"/></td>
     </script>
 </div>
