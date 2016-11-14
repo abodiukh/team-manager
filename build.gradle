@@ -23,7 +23,7 @@ apply plugin: 'spring-boot'
 apply plugin: 'war'
 
 war {
-  baseName = 'levi9-team-manager'
+  baseName = 'team-manager'
   version = '0.1.0'
 }
 
