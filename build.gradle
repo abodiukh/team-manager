@@ -22,7 +22,7 @@ apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
 apply plugin: 'war'
 
-jar {
+war {
   baseName = 'team-manager'
   version = '0.1.0'
 }
