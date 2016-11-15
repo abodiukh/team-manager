@@ -30,11 +30,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -85,23 +87,30 @@ public class BaseController {
     public String registration(@Valid UserDTO userDTO, Errors errors, BindingResult result, WebRequest request, Model model) {
         List<String> invalidMessages = new ArrayList<>();
         if (!result.hasErrors()) {
+            User registered = null;
             try {
-                User registered = userService.addUser(userDTO);
-                String appUrl = request.getContextPath();
+                registered = userService.addUser(userDTO);
+                String appUrl = ((ServletWebRequest) request).getRequest().getServerName();
                 eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), appUrl));
             } catch (EmailExistsException e) {
                 invalidMessages.add(e.getMessage());
             } catch (Exception e) {
                 invalidMessages.add("Invalid email");
-                userService.deleteUser(userDTO.getId());
+                if (registered != null) {
+                    userService.deleteUser(registered.getId());
+                }
             }
         } else {
             for (ObjectError error : errors.getAllErrors()) {
-                invalidMessages.add(error.getDefaultMessage());
+                if (error instanceof FieldError) {
+                    invalidMessages.add(((FieldError) error).getField() + " " + error.getDefaultMessage());
+                } else {
+                    invalidMessages.add(error.getDefaultMessage());
+                }
             }
         }
         if (!invalidMessages.isEmpty()) {
-            model.addAttribute("errors", errors);
+            model.addAttribute("errors", invalidMessages);
         } else {
             return "redirect:/login";
         }

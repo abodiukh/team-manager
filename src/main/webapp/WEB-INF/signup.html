@@ -9,6 +9,10 @@
     <div class="col-sm-4 col-sm-offset-4">
         <form style="margin-top: 30%;" class="form-signin" name="login-form" th:action="@{/registration}" method="post">
             <h2 class="form-signin-heading">Please Register</h2>
+            <div th:if="${errors}" class="alert alert-danger">
+                <label th:each="error : ${errors}" th:text="${error}"></label>
+                <!--<label>Email already exists or password doesn't matches</label>-->
+            </div>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input class="form-control" type="text" id="email" name="email"/>
