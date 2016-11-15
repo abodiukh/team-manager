@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -jar build/libs/team-manager-0.1.0.war
+web: java $JAVA_OPTS -jar -Dserver.port=$PORT build/libs/team-manager-0.1.0.war
