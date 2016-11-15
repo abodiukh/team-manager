@@ -39,6 +39,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         email.setTo(recipientAddress);
         email.setSubject(subject);
         email.setText("Follow the link " + "https://" + confirmationUrl);
+        System.out.println("Email is ready to send");
         mailSender.send(email);
     }
 }

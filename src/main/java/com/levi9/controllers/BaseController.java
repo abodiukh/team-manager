@@ -95,6 +95,7 @@ public class BaseController {
             } catch (EmailExistsException e) {
                 invalidMessages.add(e.getMessage());
             } catch (Exception e) {
+                System.out.println(e.getMessage());
                 invalidMessages.add("Invalid email");
                 if (registered != null) {
                     userService.deleteUser(registered.getId());
