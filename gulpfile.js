@@ -5,7 +5,7 @@ const minify = require('gulp-minify-css');
 const uglify = require('gulp-uglify');
 
 const config = {
-    build: 'src/main/webapp/resources/build',
+    build: 'src/main/webapp/resources/package',
     files: {
         fonts: [
             'node_modules/bootstrap/fonts/*'

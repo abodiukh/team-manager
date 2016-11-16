@@ -1,0 +1,1 @@
+app.factory("propertiesFactory",["$http",function(e){return{getPositions:function(){return e.get("/properties/positions")},getSeniorities:function(){return e.get("/properties/seniorities")},getEmployees:function(){return e.get("/properties/employees")}}}]);

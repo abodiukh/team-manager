@@ -1,0 +1,1 @@
+app.directive("unselectTeam",function(n){return{restrict:"A",link:function(i,c,t,e){c.bind("click",function(n){n.stopPropagation()}),n.bind("click",function(){i.$apply(t.unselectTeam)})}}});
