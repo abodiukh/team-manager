@@ -39,8 +39,7 @@ public class UserService {
         }
         User user = new User(userDTO.getEmail(), userDTO.getName(), passwordEncoder.encode(userDTO.getPassword()));
         user.setEnabled(false);
-        UserRole userRole = new UserRole();
-        userRole.setId(0L);
+        UserRole userRole = userRoleRepository.findByRole("user");
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         return userRepository.save(user);
     }
