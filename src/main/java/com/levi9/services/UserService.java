@@ -53,6 +53,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public void saveUser(final User user) {
+        userRepository.save(user);
+    }
+
     public void createVerificationToken(final User user, final String token) {
         verificationRepository.save(new Verification(token, user));
     }

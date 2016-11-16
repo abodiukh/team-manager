@@ -136,11 +136,8 @@ public class BaseController {
             return new ResponseEntity<>("Token was expired", HttpStatus.BAD_REQUEST);
         }
 
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(user.getId());
-        userDTO.setEnabled(true);
-        userDTO.setRoles(user.getRoles().stream().map(UserRole::getRole).collect(Collectors.toSet()));
-        userService.updateUser(userDTO);
+        user.setEnabled(true);
+        userService.saveUser(user);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(uriBuilder.path("/").build().toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.SEE_OTHER);
