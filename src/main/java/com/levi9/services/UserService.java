@@ -57,6 +57,13 @@ public class UserService {
         verificationRepository.save(new Verification(token, user));
     }
 
+    public void deleteVerificationToken(final Long userId) {
+        Verification verification = verificationRepository.findByUserId(userId);
+        if (verification != null) {
+            verificationRepository.delete(verification);
+        }
+    }
+
     public Verification getVerificationToken(final String token) {
         return verificationRepository.findByToken(token);
     }
@@ -69,4 +76,5 @@ public class UserService {
         User user = userRepository.findByEmail(email);
         return user != null;
     }
+
 }

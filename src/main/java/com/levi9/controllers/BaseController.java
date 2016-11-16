@@ -32,7 +32,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -97,9 +96,7 @@ public class BaseController {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 invalidMessages.add("Invalid email");
-                if (registered != null) {
-                    userService.deleteUser(registered.getId());
-                }
+                cleanAfterFailedRegistration(registered);
             }
         } else {
             for (ObjectError error : errors.getAllErrors()) {
@@ -116,6 +113,13 @@ public class BaseController {
             return "redirect:/login";
         }
         return "signup";
+    }
+
+    private void cleanAfterFailedRegistration(final User registered) {
+        if (registered != null) {
+            userService.deleteVerificationToken(registered.getId());
+            userService.deleteUser(registered.getId());
+        }
     }
 
     @RequestMapping(value = "/registration/confirm", method = RequestMethod.GET)

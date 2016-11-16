@@ -79,6 +79,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         Properties javaMailProperties = new Properties();
         javaMailProperties.setProperty("mail.smtp.auth", environment.getRequiredProperty("mail.smtp.auth"));
         javaMailProperties.setProperty("mail.smtp.starttls.enable", environment.getRequiredProperty("mail.smtp.starttls.enable"));
+        javaMailProperties.setProperty("mail.debug", "true");
         javaMailSender.setJavaMailProperties(javaMailProperties);
         return javaMailSender;
     }
