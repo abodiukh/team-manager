@@ -8,6 +8,7 @@ import com.levi9.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +31,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         String token = UUID.randomUUID().toString();
         userService.createVerificationToken(user, token);
 
-        /*String recipientAddress = user.getEmail();
+        String recipientAddress = user.getEmail();
         String subject = "Registration Confirmation";
         String confirmationUrl = event.getAppUrl() + "/registration/confirm?token=" + token;
 
@@ -39,9 +40,6 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         email.setSubject(subject);
         email.setText("Follow the link " + "https://" + confirmationUrl);
         System.out.println("Email is ready to send");
-        mailSender.send(email);*/
-
-        user.setEnabled(true);
-        userService.saveUser(user);
+        mailSender.send(email);
     }
 }
