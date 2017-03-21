@@ -15,8 +15,10 @@ import com.levi9.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class TeamService {
 
     @Autowired
@@ -32,6 +34,7 @@ public class TeamService {
     private TeamCalculator teamCalculator;
 
     @PreAuthorize("isAuthenticated()")
+    @Transactional(readOnly = true)
     public List<TeamDTO> getTeams(String userName) {
         User user = userRepository.findByName(userName);
         if (user != null) {

@@ -33,12 +33,16 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
         String recipientAddress = user.getEmail();
         String subject = "Registration Confirmation";
-        String confirmationUrl = event.getAppUrl() + "/registration/confirm?token=" + token;
+        String appUrl = event.getAppUrl();
+        if (appUrl.contains("localhost")) {
+            appUrl = appUrl + ":8080";
+        }
+        String confirmationUrl = appUrl + "/registration/confirm?token=" + token;
 
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipientAddress);
         email.setSubject(subject);
-        email.setText("Follow the link " + "https://" + confirmationUrl);
+        email.setText("Follow the link " + "http://" + confirmationUrl);
         System.out.println("Email is ready to send");
         mailSender.send(email);
     }

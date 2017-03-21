@@ -17,8 +17,10 @@ import com.levi9.repositories.VerificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class UserService {
 
     @Autowired
@@ -75,6 +77,7 @@ public class UserService {
         userRepository.delete(id);
     }
 
+    @Transactional(readOnly = true)
     private boolean emailExist(String email) {
         User user = userRepository.findByEmail(email);
         return user != null;

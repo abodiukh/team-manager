@@ -42,6 +42,7 @@ dependencies {
   compile('org.springframework.boot:spring-boot-starter-web')
   compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
   compile group: 'javax.mail', name: 'mail', version: '1.4.7'
+  compile group: 'org.hibernate', name: 'hibernate-ehcache', version: '5.0.11.Final'
 
   compile('org.thymeleaf:thymeleaf-spring4:3.0.0.RELEASE')
   compile('org.thymeleaf:thymeleaf:3.0.0.RELEASE')

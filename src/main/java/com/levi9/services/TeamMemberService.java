@@ -14,8 +14,10 @@ import com.levi9.repositories.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class TeamMemberService {
 
     @Autowired
@@ -37,12 +39,14 @@ public class TeamMemberService {
     private Converter converter;
 
     @PreAuthorize("isAuthenticated()")
+    @Transactional(readOnly = true)
     public TeamMemberDTO getMember(final Long id) {
         TeamMember teamMember = teamMemberRepository.findOne(id);
         return converter.toTeamMemberDTO(teamMember);
     }
 
     @PreAuthorize("isAuthenticated()")
+    @Transactional(readOnly = true)
     public TeamMemberDTO getMemberByName(final String name) {
         TeamMember teamMember = teamMemberRepository.findByEmployeeName(name);
         if (teamMember != null) {

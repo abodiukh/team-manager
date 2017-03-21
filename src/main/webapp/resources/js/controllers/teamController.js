@@ -44,14 +44,12 @@ app.controller("teamController", ['$scope', 'teamFactory', function ($scope, tea
 
     $scope.deleteMember = function (team, member) {
         $scope.team.members.splice(member, 1);
-        if (member.id) {
-            teamFactory.deleteMember(member.id).success(function (data) {
-                teamFactory.getTeam(team.id).success(function (data) {
-                    $scope.team = data;
-                    $scope.$emit('teamChanged', {"editMode": $scope.editMode, "team": $scope.team})
-                })
-            });
-        }
+        teamFactory.deleteMember(member.id).success(function (data) {
+            teamFactory.getTeam(team.id).success(function (data) {
+                $scope.team = data;
+                $scope.$emit('teamChanged', {"editMode": $scope.editMode, "team": $scope.team})
+            })
+        });
     };
 
     $scope.editMember = function (team, member) {

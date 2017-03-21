@@ -139,7 +139,7 @@ public class BaseController {
         user.setEnabled(true);
         userService.saveUser(user);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(uriBuilder.path("/").build().toUri());
+        headers.setLocation(uriBuilder.path("/login").build().toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.SEE_OTHER);
     }
 

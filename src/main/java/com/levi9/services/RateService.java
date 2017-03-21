@@ -14,8 +14,10 @@ import com.levi9.repositories.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class RateService {
 
     @Autowired
@@ -34,12 +36,14 @@ public class RateService {
     private Converter converter;
 
     @PreAuthorize("isAuthenticated()")
+    @Transactional(readOnly = true)
     public List<RateDTO> getRates() {
         List<Rate> rates = rateRepository.findAll();
         return rates.stream().map(rate -> converter.toRateDTO(rate)).collect(Collectors.toList());
     }
 
     @PreAuthorize("isAuthenticated()")
+    @Transactional(readOnly = true)
     public RateDTO getRate(final Long id) {
         Rate rate = rateRepository.findOne(id);
         return converter.toRateDTO(rate);

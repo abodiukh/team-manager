@@ -1,18 +1,19 @@
 package com.levi9.domain;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
+
 import java.util.Set;
 
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
 public class User {
 
     @Id

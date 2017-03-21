@@ -1,13 +1,14 @@
 package com.levi9.domain;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
 public class Employee {
 
     @Id
